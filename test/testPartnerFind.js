@@ -1,5 +1,6 @@
 var partnerFind = require("../functions/partnerFind.js"),
-    partners = require("../partners.json");
+    partnerJson = require("../partners.json")
+    expect = require('chai').expect;
 
 describe("deepClone function", function(){
   

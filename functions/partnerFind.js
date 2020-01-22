@@ -1,5 +1,15 @@
+/**
+ * Process input json data to check for valid partners
+ * 
+ * @param json jsonObj
+ */
+exports.dataParse = function(jsonObj) {
 
-exports.calculateDistanceToLondon = function(latitud, longitude) {
+    jsonObj = JSON.parse(jsonObj);
+}
+
+
+function calculateDistanceToLondon(latitud, longitude) {
 
     const centralLondonLatitude = 51.515419;
     const centralLondonLongitude = -0.141099;
@@ -8,15 +18,12 @@ exports.calculateDistanceToLondon = function(latitud, longitude) {
 
 }
 
-exports.createList = function() {
-
-
-}
-
-function dataParse(jsonObj) {
-
-}
-
 function degToRad(degrees) {
     return degrees * (Math.PI/180)
+}
+
+
+function sortPartnerList(currentObj) {
+
+
 }
