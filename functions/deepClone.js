@@ -18,5 +18,5 @@ exports.deepClone = function(obj) {
     }
 
     // None of the above cases, throw exception
-    throw new Error("Unable to copy obj! Its type isn't supported.");
+    throw new Error("Unable to copy object! Its type isn't supported.");
 }
