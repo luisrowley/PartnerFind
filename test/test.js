@@ -14,15 +14,6 @@ describe("Hello World Server", function(){
 
             });
         });
-
-        it("returns Spidergap test", function(done) {
-
-            request.get(base_url, function(error, response, body) {
-                assert.equal("Spidergap test", body);
-                spiderTest.closeServer();
-                done();
-            });
-        });
     });
 });
 

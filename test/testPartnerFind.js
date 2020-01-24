@@ -53,8 +53,8 @@ describe("PartnerFind class", function(){
     it("calculateDistance returns expected value from input coordinates.", function(done) {
 
         coordinates = partnerJson[0].offices[0].coordinates;
-        const lat = 51.515419;
-        const lon = -0.141099;
+        const lat = partnerFind.londonLat;
+        const lon = partnerFind.londonLon;
         const lat2 = -33.8934219;
         const lon2 = 151.20404600000006;
 
@@ -74,12 +74,22 @@ describe("PartnerFind class", function(){
 
         var nearPartners = partnerFind.dataParse(partnerJson);
 
-        console.log(nearPartners);
+        //console.log(nearPartners);
         //expect(distance).to.equal(expected);
 
         done();
     });
     
-    
+    /* 
+     * Test presentData function
+     */
+    it("presentData provides with a readable list of nearby partners.", function(done) {
 
+        var nearPartners = partnerFind.dataParse(partnerJson);
+        var data = partnerFind.presentData(nearPartners);
+
+        console.log(data);
+
+        done();
+    });
 });
