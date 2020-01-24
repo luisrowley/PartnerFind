@@ -68,15 +68,36 @@ describe("PartnerFind class", function(){
     });
 
     /* 
-     * Test dataParse function returns expected object array
+     * Test compareByName function returns expected object array
      */
-    it("dataParse returns an unordered array of partners within 100 km.", function(done) {
+    it("compareByName returns an ascending ordered array by partner name.", function(done) {
 
-        var nearPartners = partnerFind.dataParse(partnerJson);
+        var originData = [
+            {
+                "organization": "Gallus Consulting"
+            },
+            {
+                "organization": "Win With People"
+            },
+            {
+                "organization": "Blue Square 360"
+            }
+        ];
 
-        //console.log(nearPartners);
-        //expect(distance).to.equal(expected);
+        var result = [
+            {
+                "organization": "Blue Square 360"
+            },
+            {
+                "organization": "Gallus Consulting"
+            },
+            {
+               "organization": "Win With People"
+            }
+        ];
 
+        let sortedData = originData.sort(partnerFind.compareByName);
+        expect(sortedData).to.deep.equal(result);
         done();
     });
     
