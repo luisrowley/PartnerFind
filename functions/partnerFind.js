@@ -1,6 +1,18 @@
 module.exports = class PartnerFind {
 
-    constructor(){ }
+    /**
+     * Class constructor.
+     * Sets the initial values for global variables as required.
+     */
+    constructor()
+    {  
+        // Global variable for max distance in km
+        this.MAXDISTANCE = 100;
+        // Central London latitude coordinate
+        this.londonLat = 51.515419;
+        // Central London longitud coordinate
+        this.londonLon = -0.141099;
+    }
 
     /**
      * Process input json data to check for valid partners
@@ -10,38 +22,41 @@ module.exports = class PartnerFind {
      */
     dataParse(partnerList) {
 
-        //let partnerList = JSON.parse(jsonObj);
+        let validPartners = [];
+        
+        partnerList.forEach((partner) => {
 
-        let validPartners = partnerList.map(function(partner) {
-
-            let validOffices = partner.offices.filter(office => 
-                this.isValidDistance(office.coordinates)   
+            let validOffices = partner.offices.filter((office) => 
+                this.isValidDistance(office.coordinates) 
             );
 
-            if(validOffices) return {
-                organization: partner.organization,
-                offices: validOffices
-            };
+            if(validOffices.length) {
+
+                let locations = validOffices.map((office) => 
+                    office.address
+                )
+
+                validPartners.push({
+                    organization: partner.organization,
+                    offices: locations
+                });
+            }
         });
 
-        return validPartners || [];
+        return validPartners;
     }
 
-    isValidDistance(coordinates) {
-
-        const MAXDISTANCE = 100; // in km
-        const londonLat = 51.515419;
-        const londonLon = -0.141099;
+    isValidDistance(coordinates, lat=this.londonLat, lon=this.londonLon) {
 
         let partnerLat  = parseFloat(coordinates.substr(0, coordinates.indexOf(',')));
         let partnerLon = parseFloat(coordinates.substr(coordinates.indexOf(',')+1));
 
-        return calculateDistance(londonLat, londonLon, partnerLat, partnerLon) <= 100;
+        return this.calculateDistance(lat, lon, partnerLat, partnerLon) <= this.MAXDISTANCE;
     }
 
     /** returns distance in km 
      * @see Haversine-Formula: a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
-     *                         c = 2 ⋅ atan2( √a, √(1−a) )
+     *                         c = 2 ⋅ arcsin( √a )
      *                         d = R ⋅ c
      * 
      * @ref https://en.wikipedia.org/wiki/Great-circle_distance
@@ -49,19 +64,29 @@ module.exports = class PartnerFind {
     */
     calculateDistance(lat, lon, lat2, lon2) {
 
-        const radius = 6371; // Earth radius in km
+        // Earth radius in km
+        const r = 6371;
 
+        // Latitud differential
         var dLat = this.degToRad(lat2-lat);
+
+        // Longitud differential
         var dLon = this.degToRad(lon2-lon);
+
+        // Haversine function
         var a = 
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(deg2rad(lat)) * Math.cos(deg2rad(lat2)) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2);
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(this.degToRad(lat)) * Math.cos(this.degToRad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2);
 
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        var dist = radius * c; // Distance in km
+        // Angular distance in radians
+        var c = 2 * Math.asin(Math.sqrt(a));
 
-        return dist;
+        // Distance in km
+        var dist = r * c;
+
+        // result rounded two decimal positions
+        return Math.round(dist * 100) / 100;
     }
 
     degToRad(degrees) {
