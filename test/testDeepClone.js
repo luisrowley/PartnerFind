@@ -73,6 +73,23 @@ describe("deepClone function", function(){
     });
 
     /* 
+     * Checks for input object with nested structures with methods.
+     */
+    it("supports nested structures containing method properties", function(done) {
+
+        let obj = {name: "Paddy", address: {town: "Lerum", country: "Sweden", sayHi: function(){
+            console.log("hi");
+        }}};
+
+        newObj = dc.deepClone(obj);
+        console.log(newObj);
+        // avoid using strict equality
+        expect(newObj).to.deep.equal(obj);
+        expect(newObj.address.town).to.equal(obj.address.town);
+        done();
+    });
+
+    /* 
      * Checks for input object containing a nested array property.
      */
     it("supports nested array as a property", function(done) {
