@@ -61,7 +61,7 @@ describe("deepClone function", function(){
     /* 
      * Checks for input object with nested structures.
      */
-    it("supports nested structures", function(done) {
+    it("supports nested object structures", function(done) {
 
         let obj = {name: "Paddy", address: {town: "Lerum", country: "Sweden"}};
 
@@ -75,7 +75,7 @@ describe("deepClone function", function(){
     /* 
      * Checks for input object with nested structures with methods.
      */
-    it("supports nested structures containing method properties", function(done) {
+    it("supports nested object structures containing method properties", function(done) {
 
         let obj = {name: "Paddy", address: {town: "Lerum", country: "Sweden", sayHi: function(){
             console.log("hi");
