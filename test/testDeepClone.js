@@ -82,7 +82,7 @@ describe("deepClone function", function(){
         }}};
 
         newObj = dc.deepClone(obj);
-        console.log(newObj);
+        // console.log(newObj);
         // avoid using strict equality
         expect(newObj).to.deep.equal(obj);
         expect(newObj.address.town).to.equal(obj.address.town);
