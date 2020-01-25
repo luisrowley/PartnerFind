@@ -3,7 +3,7 @@ var request = require("request"),
     spiderTest = require("../app.js"),
     base_url = "http://127.0.0.1:3000/";
 
-describe("Hello World Server", function(){
+describe("Node Server", function(){
     describe("GET /", function() {
         it("returns status code 200", function(done) {
 
