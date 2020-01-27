@@ -49,10 +49,10 @@ npm test < ./path/to/file >
 ```
 
 
-For example, in order to test the **WPNonce** class from the project folder you would run:
+For example, in order to test the **PartnerFind** class from the project folder you would run:
 
 ```
-npm test ./test/testDeepClone.js
+npm test ./test/testPartnerFind.js
 ```
 
 ## Built With
