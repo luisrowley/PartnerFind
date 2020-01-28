@@ -53,8 +53,8 @@ describe("PartnerFind class", function(){
     it("calculateDistance returns expected value from input coordinates.", function(done) {
 
         coordinates = partnerJson[0].offices[0].coordinates;
-        const lat = partnerFind.londonLat;
-        const lon = partnerFind.londonLon;
+        const lat = partnerFind.londonLatitude;
+        const lon = partnerFind.londonLongitude;
         const lat2 = -33.8934219;
         const lon2 = 151.20404600000006;
 
