@@ -50,7 +50,7 @@ describe("PartnerFind class", function(){
     /* 
      * Test distance computation from latitude/longitud coordinate pair.
      */
-    it("calculateDistance returns expected value from input coordinates.", function(done) {
+    it("calculateDistanceInKm returns expected value from input coordinates.", function(done) {
 
         coordinates = partnerJson[0].offices[0].coordinates;
         const lat = partnerFind.londonLatitude;
@@ -60,7 +60,7 @@ describe("PartnerFind class", function(){
 
         var expected = 16996.05; // in km
 
-        var distance = partnerFind.calculateDistance(lat, lon, lat2, lon2);
+        var distance = partnerFind.calculateDistanceInKm(lat, lon, lat2, lon2);
 
         expect(distance).to.equal(expected);
 

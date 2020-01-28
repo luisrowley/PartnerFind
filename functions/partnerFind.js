@@ -48,7 +48,7 @@ module.exports = class PartnerFind {
     }
 
     /**
-     * Parses the coordinates value in string form and calls calculateDistance
+     * Parses the coordinates value in string form and calls calculateDistanceInKm
      * to determine if two points are a within the expected MAXDISTANCE range.
      * 
      * It takes optional parameters for the initial point.
@@ -66,7 +66,7 @@ module.exports = class PartnerFind {
 
         let partnerLatitude = parseFloat(coordinates.substr(0, coordinates.indexOf(',')));
         let partnerLongitude = parseFloat(coordinates.substr(coordinates.indexOf(',')+1));
-        let totalDistance = this.calculateDistance(latitude, longitude, partnerLatitude, partnerLongitude);
+        let totalDistance = this.calculateDistanceInKm(latitude, longitude, partnerLatitude, partnerLongitude);
 
         return totalDistance <= this.MAXDISTANCE;
     }
@@ -90,7 +90,7 @@ module.exports = class PartnerFind {
      * 
      * @returns dist | The distance (in km) rounded to two decimal positions.
     */
-    calculateDistance(originLatitude, originLongitude, destinationLatitude, destinationLongitude) {
+    calculateDistanceInKm(originLatitude, originLongitude, destinationLatitude, destinationLongitude) {
 
         // Earth radius in km
         const radius = 6371;
